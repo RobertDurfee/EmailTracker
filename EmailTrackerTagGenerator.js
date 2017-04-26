@@ -5,12 +5,12 @@ prompt.delimiter = ':';
 
 prompt.start();
 
-prompt.get(['Subject', 'From', 'To'], function (err, result) {
+prompt.get(['Subject', 'Recipient'], function (err, result) {
     if(err) { console.log(err); }
 
     console.log('');
 
-    var EmailHeaderObject = { "Subject" : result.Subject, "From" : result.From, "To" : result.To };
+    var EmailHeaderObject = { "Subject" : result.Subject, "Recipient" : result.Recipient };
 
     var DecodedEmailHeaderString = JSON.stringify(EmailHeaderObject);
     var EncodedEmailHeaderString = encodeURIComponent(DecodedEmailHeaderString);
