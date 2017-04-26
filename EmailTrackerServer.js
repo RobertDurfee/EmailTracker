@@ -6,10 +6,6 @@ var nodemailer = require('nodemailer');
 function getFormattedDate() {
     var date = new Date();
 
-    //Convert to Central Time
-    var utc = date.getTime() - (date.getTimezoneOffset() * 60000);
-    date = new Date(utc + (3600000 * -5));
-
     var month = date.getMonth() + 1;
     var date2 = date.getDate();
     var year = date.getYear() + 1900;
@@ -18,10 +14,6 @@ function getFormattedDate() {
 }
 function getFormattedTime() {
     var date = new Date();
-
-    //Convert to Central Time
-    var utc = date.getTime() - (date.getTimezoneOffset() * 60000);
-    date = new Date(utc + (3600000 * -5));
     
     var hour = date.getHours();
     var minutes = date.getMinutes();
@@ -62,7 +54,7 @@ var server = http.createServer(function (req, res) {
         var EmailSubjectString = "Email Viewed: '" + EmailHeader.Subject + "'";
 
         var mailOptions = {
-            from : '"Email Tracker" <%SEMAIL_ADDRESS%>',
+            from : '"Email Tracker" <%EMAIL_ADDRESS%>',
             to : '%EMAIL_ADDRESS%',
             subject : EmailSubjectString,
             text : EmailBodyString
