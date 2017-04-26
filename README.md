@@ -1,2 +1,2 @@
 # EmailTracker
-A pair of compiled-JavaScript programs that enable email tracking.
+A pair of JavaScript programs that enable email tracking.
