@@ -34,22 +34,20 @@ var transporter = nodemailer.createTransport({
 });
 
 var server = http.createServer(function (req, res) {
-    var path = url.parse(req.url).pathname;
-
-    var EncodedEmailHeaderString = path.slice(1);
-
-    var DecodedEmailHeaderString = decodeURIComponent(EncodedEmailHeaderString);
-
-    var EmailHeader;
-
     try {
-        EmailHeader = JSON.parse(DecodedEmailHeaderString);
+        var IPAddress = req.connection.remoteAddress.replace(/^.*:/, '');
+        
+        var path = url.parse(req.url).pathname;
+        var EncodedEmailHeaderString = path.slice(1);
+        var DecodedEmailHeaderString = decodeURIComponent(EncodedEmailHeaderString);
+
+        var EmailHeader = JSON.parse(DecodedEmailHeaderString);
 
         var EmailBodyString = "Subject: " + EmailHeader.Subject + "\n" +
-                              "From: " + EmailHeader.From + "\n" +
-                              "To: " + EmailHeader.To + "\n" +
+                              "Recipient: " + EmailHeader.Recipient + "\n" +
                               "Date: " + getFormattedDate() + "\n" +
-                              "Time: " + getFormattedTime();
+                              "Time: " + getFormattedTime() + "\n" +
+                              "IP: " + IPAddress;
 
         var EmailSubjectString = "Email Viewed: '" + EmailHeader.Subject + "'";
 
