@@ -76,4 +76,4 @@ var server = http.createServer(function (req, res) {
     }
 });
 
-server.listen(8001);
+server.listen(%PORT_NUMBER%);
